@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polyatomic Ions Pop Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --primary: #38bdf8;
+            --success: #22c55e;
+            --error: #ef4444;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at top right, #1e1b4b, transparent);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        .question-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .q-box {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .q-box:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .q-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Status Styles */
+        .correct { border-color: var(--success) !important; background: rgba(34, 197, 94, 0.1) !important; animation: pulse-success 0.75s; }
+        .wrong { border-color: var(--error) !important; background: rgba(239, 68, 68, 0.1) !important; animation: pulse-error 0.75s; }
+
+        @keyframes pulse-success {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        @keyframes pulse-error {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: #0f172a;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+            transform: scale(1.02);
+        }
+
+        #result-display {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback-text {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Polyatomic Ions Pop Quiz (Sinai) </h1>
+        <p style="opacity: 0.7;">Master your knowledge of common polyatomic ions</p>
+    </header>
+
+    <div class="section-title">Section A: Name → Formula</div>
+    <div class="question-grid">
+        <div class="q-box">
+            <span class="q-label">1. Hydroxide</span>
+            <input type="text" id="q1" placeholder="e.g. OH-">
+            <span class="feedback-text" id="fb1"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">2. Nitrate</span>
+            <input type="text" id="q2">
+            <span class="feedback-text" id="fb2"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">3. Nitrite</span>
+            <input type="text" id="q3">
+            <span class="feedback-text" id="fb3"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">4. Chlorite</span>
+            <input type="text" id="q4">
+            <span class="feedback-text" id="fb4"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">5. Ammonium</span>
+            <input type="text" id="q5">
+            <span class="feedback-text" id="fb5"></span>
+        </div>
+    </div>
+
+    <div class="section-title">Section B: Formula → Name</div>
+    <div class="question-grid">
+        <div class="q-box">
+            <span class="q-label">6. CO<sub>3</sub><sup>2&minus;</sup></span>
+            <input type="text" id="q6" placeholder="Enter name">
+            <span class="feedback-text" id="fb6"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">7. SO<sub>4</sub><sup>2&minus;</sup></span>
+            <input type="text" id="q7">
+            <span class="feedback-text" id="fb7"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">8. SO<sub>3</sub><sup>2&minus;</sup></span>
+            <input type="text" id="q8">
+            <span class="feedback-text" id="fb8"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">9. PO<sub>4</sub><sup>3&minus;</sup></span>
+            <input type="text" id="q9">
+            <span class="feedback-text" id="fb9"></span>
+        </div>
+        <div class="q-box">
+            <span class="q-label">10. HCO<sub>3</sub><sup>&minus;</sup></span>
+            <input type="text" id="q10">
+            <span class="feedback-text" id="fb10"></span>
+        </div>
+    </div>
+
+    <footer>    <h6>Copyright © 2026 by Mostafa. All rights reserved. No part of this work may be reproduced without written permission.</h6>   </footer>
+
+    <button id="grade-button" onclick="checkAnswers()">Grade My Exam</button>
+
+    <div id="result-display"></div>
+</div>
+
+<script>
+function normalize(text) {
+    return text.toLowerCase().trim().replace(/\s+/g, "").replace(/\^/g, "");
+}
+
+function checkAnswers() {
+    const answers = [
+        ["oh-"], 
+        ["no3-"], 
+        ["no2-"], 
+        ["clo2-"], 
+        ["nh4+"],
+        ["carbonate"],
+        ["sulphate", "sulfate"], 
+        ["sulphite", "sulfite"],
+        ["phosphate"],
+        ["bicarbonate", "hydrogencarbonate"]
+    ];
+
+    const displayAnswers = [
+        "OH<sup>&minus;</sup>",
+        "NO<sub>3</sub><sup>&minus;</sup>",
+        "NO<sub>2</sub><sup>&minus;</sup>",
+        "ClO<sub>2</sub><sup>&minus;</sup>",
+        "NH<sub>4</sub><sup>+</sup>",
+        "Carbonate",
+        "Sulfate / Sulphate",
+        "Sulfite / Sulphite",
+        "Phosphate",
+        "Bicarbonate / Hydrogen carbonate"
+    ];
+
+    let score = 0;
+    const total = 10;
+
+    for (let i = 1; i <= total; i++) {
+        const input = document.getElementById("q" + i);
+        const fb = document.getElementById("fb" + i);
+        const userAnswer = normalize(input.value);
+        const correctOptions = answers[i-1].map(normalize);
+        
+        if (correctOptions.includes(userAnswer) && userAnswer !== "") {
+            input.classList.remove('wrong');
+            input.classList.add('correct');
+            fb.innerHTML = '<span style="color: var(--success);">✅ Correct!</span>';
+            score++;
+        } else {
+            input.classList.remove('correct');
+            input.classList.add('wrong');
+            fb.innerHTML = '<span style="color: var(--error);">❌ Correct: ' + displayAnswers[i-1] + '</span>';
+        }
+    }
+
+    const resultDiv = document.getElementById("result-display");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = `Final Score: ${score} / ${total}`;
+    
+    if (score === total) {
+        resultDiv.style.color = "#22c55e";
+        resultDiv.innerHTML += " 🏆 Perfect!";
+    } else {
+        resultDiv.style.color = "#38bdf8";
+    }
+
+    // Change button to retry
+    const button = document.getElementById("grade-button");
+    button.innerText = "Retry Quiz";
+    button.onclick = resetQuiz;
+
+    // Scroll to bottom to see score
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+    for (let i = 1; i <= 10; i++) {
+        const input = document.getElementById("q" + i);
+        const fb = document.getElementById("fb" + i);
+        input.value = "";
+        input.classList.remove("correct", "wrong");
+        fb.innerHTML = "";
+    }
+
+    const resultDiv = document.getElementById("result-display");
+    resultDiv.style.display = "none";
+
+    const button = document.getElementById("grade-button");
+    button.innerText = "Grade My Exam";
+    button.onclick = checkAnswers;
+}
+</script>
+
+</body>
+</html>
